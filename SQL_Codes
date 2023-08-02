@@ -1,0 +1,329 @@
+﻿CREATE DATABASE [dbms] ON PRIMARY
+( NAME = 'dbms', FILENAME = 'C:\............\dbms_group4.mdf' ,
+SIZE = 8192KB , MAXSIZE = 307200KB , FILEGROWTH = 5%)
+LOG ON
+( NAME = 'dbms', FILENAME = 'C:\............\dbms_group4.ldf',
+SIZE = 8192KB , FILEGROWTH = 5%)
+
+use dbms
+
+Create table VENDOR
+(
+	V_Id int primary key identity(100,1) not null,
+	V_Name varchar(50) not null,
+	V_Address varchar(50) not null,
+	V_Phone char(12) not null
+)
+
+create table ORDER_
+(
+	O_No int primary key not null,
+	O_Size int not null,
+	O_Weight int not null
+)
+
+create table CARGO
+(
+	C_No int primary key identity(100000,1) not null,
+	Des_Date date not null,
+	Arr_Date date not null
+)
+
+Create table CITY
+(
+	Ci_Id int primary key not null,
+	Ci_Name varchar(30) not null
+)
+
+Create table COUNTRY
+(
+	Co_Id int primary key not null,
+	Co_Name varchar(30) not null
+)
+
+Create table ADDRESS_
+(
+	Door_No int  not null,
+	Ap_No int not null,
+	Post_Code char(6) primary key not null,
+	Street varchar(30) not null,
+)
+Create table CUSTOMER
+(
+	Cu_Id int primary key identity(1000,1) not null,
+	Cu_Name varchar(30) not null,
+	Cu_SName varchar(30) not null,
+	Cu_Phone char(12) not null,
+	Cu_home_phone char(12) ,
+	FK_post_code char(6) not null,
+)
+
+
+
+alter table ORDER_ add FK_v_id int foreign key references VENDOR(V_Id)
+alter table ORDER_ add FK_c_no int foreign key references CARGO(C_No)
+alter table CUSTOMER add FK_post_code char(6) foreign key references ADDRESS_(Post_Code)
+alter table ADDRESS_ add FK_ci_id int foreign key references CITY(Ci_Id)
+alter table CITY add FK_co_id int foreign key references COUNTRY(Co_Id)
+alter table CARGO add FK_cu_id int foreign key references CUSTOMER(Cu_Id)
+
+insert into VENDOR values('nokia', 'Beþiktaþ','123456789000')
+insert into VENDOR values('samsung', 'Beþiktaþ','123456789001')
+insert into VENDOR values('apple', 'Beþiktaþ','123456789002')
+insert into VENDOR values('Toshiba', 'Kadýköy','123456789003')
+insert into VENDOR values('Xiaomi', 'Fatih','123456789004')
+insert into VENDOR values('Bosch', 'Beþiktaþ','123456789005')
+insert into VENDOR values('Arçelik', 'Esenler','123456789006')
+insert into VENDOR values('General Mobile', 'Üsküdar','123456789007')
+insert into VENDOR values('Siemens', 'Beþiktaþ','123456789008')
+insert into VENDOR values('Beko', 'Kadýköy','123456789009')
+insert into VENDOR values('Huawei', 'Beþiktaþ','123456789010')
+insert into VENDOR values('LG', 'Beþiktaþ','123456789011')
+insert into VENDOR values('Anker', 'Beþiktaþ','123456789012')
+insert into VENDOR values('Motorola', 'Kadýköy','123456789013')
+insert into VENDOR values('Philips', 'Fatih','123456789014')
+insert into VENDOR values('Smeg', 'Beþiktaþ','123456789015')
+insert into VENDOR values('Beats', 'Esenler','123456789016')
+insert into VENDOR values('Sony', 'Üsküdar','123456789017')
+insert into VENDOR values('Lenovo', 'Beþiktaþ','123456789018')
+insert into VENDOR values('Acer', 'Kadýköy','123456789019')
+
+
+insert into COUNTRY values(18, 'Almanya')
+insert into COUNTRY values(56, 'Amerika')
+insert into COUNTRY values(42, 'Japonya')
+insert into COUNTRY values(51, 'Çin')
+insert into COUNTRY values(28, 'Bulgaristan')
+insert into COUNTRY values(85, 'Finlandiya')
+insert into COUNTRY values(154, 'Ukrayna')
+insert into COUNTRY values(84, 'Rusya')
+insert into COUNTRY values(57, 'Ýsveç')
+insert into COUNTRY values(95, 'Norveç')
+insert into COUNTRY values(63, 'Kanada')
+insert into COUNTRY values(21, 'Hollanda')
+insert into COUNTRY values(14, 'Danimarka')
+insert into COUNTRY values(75, 'Belçika')
+insert into COUNTRY values(83, 'Fransa')
+insert into COUNTRY values(123, 'Ýspanya')
+insert into COUNTRY values(94, 'Ýtalya')
+insert into COUNTRY values(77, 'Güney Kore')
+insert into COUNTRY values(66, 'Mýsýr')
+insert into COUNTRY values(44, 'Hindistan')
+
+
+
+
+insert into CITY values(34520, 'Berlin',18)
+insert into CITY values(57554, 'NewYork',56)
+insert into CITY values(87534, 'Tokyo',42)
+insert into CITY values(74656, 'Pekin',51)
+insert into CITY values(57542, 'Sofya',28)
+insert into CITY values(38512, 'Helsinki',85)
+insert into CITY values(57854, 'Kiew',154)
+insert into CITY values(57541, 'Moskova',84)
+insert into CITY values(87421, 'Bern',57)
+insert into CITY values(68753, 'Oslo',95)
+insert into CITY values(28541, 'Ottowa',63)
+insert into CITY values(54654, 'Amsterdam',21)
+insert into CITY values(81213, 'Odense',14)
+insert into CITY values(94145, 'Bonn',75)
+insert into CITY values(86751, 'Paris',83)
+insert into CITY values(25435, 'Bercolana',123)
+insert into CITY values(78656, 'Roma',94)
+insert into CITY values(31451, 'Seul',77)
+insert into CITY values(78656, 'Cairo',66)
+insert into CITY values(31451, 'Delhi',44)
+
+insert into CUSTOMER values('jake', 'baker', '123123123123',  '123123123123','555555')
+insert into CUSTOMER values('jessie', 'column', '456456456456','456456456456','444444')
+insert into CUSTOMER values('jo', 'sasha', '789789789789','789789789789','333333')
+insert into CUSTOMER values('erkan', 'inci', '121123123123','121123123123','222222')
+insert into CUSTOMER values('jhon', 'nolan', '45156456456','45156456456','111111')
+insert into CUSTOMER values('michael', 'kim', '781789789789','781789789789','111112')
+insert into CUSTOMER values('jesus', 'seccil', '122123123123','122123123123','554645')
+insert into CUSTOMER values('Mohammad', 'fonya', '452456456456', '452456456456','544545')
+insert into CUSTOMER values('aamir', 'scott', '782789789789','782789789789','345412')
+insert into CUSTOMER values('alexander', 'hamilton', '124123123123','124123123123','578741')
+insert into CUSTOMER values('La', 'fayatte', '454456456456','454456456456','875642')
+insert into CUSTOMER values('love', 'love', '784789789789','784789789789','334642')
+insert into CUSTOMER values('pim', 'rank', '128123123123','128123123123','555454')
+insert into CUSTOMER values('jan', 'sims', '458456456456','458456456456','478794')
+insert into CUSTOMER values('adolf', 'hanya', '788789789789','788789789789','396124')
+insert into CUSTOMER values('summer', 'polu', '123523123123','123523123123','646715')
+insert into CUSTOMER values('polrva', 'snsalk', '456556456456','456556456456','784597')
+insert into CUSTOMER values('pam', 'big', '789789589789','789789589789','338610')
+
+
+
+insert into ADDRESS_ values(18, 5, '555555', 'baker',34520)
+insert into ADDRESS_ values(85, 4, '444444', 'baker',57554)
+insert into ADDRESS_ values(24, 3, '333333', 'baker',87534)
+insert into ADDRESS_ values(18, 5, '222222', 'baker',34520)
+insert into ADDRESS_ values(85, 4, '111111', 'baker',57554)
+insert into ADDRESS_ values(24, 3, '111112', 'baker',87534)
+insert into ADDRESS_ values(18, 5, '554645', 'baker',34520)
+insert into ADDRESS_ values(85, 4, '544545', 'baker',57554)
+insert into ADDRESS_ values(24, 3, '345412', 'baker',87534)
+insert into ADDRESS_ values(18, 5, '578741', 'baker',34520)
+insert into ADDRESS_ values(85, 4, '875642', 'baker',57554)
+insert into ADDRESS_ values(24, 3, '334642', 'baker',87534)
+insert into ADDRESS_ values(18, 5, '555454', 'baker',34520)
+insert into ADDRESS_ values(85, 4, '478794', 'baker',57554)
+insert into ADDRESS_ values(24, 3, '396124', 'baker',87534)
+insert into ADDRESS_ values(18, 5, '646715', 'baker',34520)
+insert into ADDRESS_ values(85, 4, '784597', 'baker',57554)
+insert into ADDRESS_ values(24, 3, '338610', 'baker',87534)
+
+
+
+insert into CARGO values('2022-01-01', '2022-01-05', 1000)
+insert into CARGO values('2022-01-02', '2022-01-06', 1001)
+insert into CARGO values('2022-01-03', '2022-01-07', 1002)
+insert into CARGO values('2022-01-01', '2022-01-05', 1003)
+insert into CARGO values('2022-01-02', '2022-01-06', 1004)
+insert into CARGO values('2022-01-03', '2022-01-07', 1005)
+insert into CARGO values('2022-01-01', '2022-01-05', 1006)
+insert into CARGO values('2022-01-02', '2022-01-06', 1007)
+insert into CARGO values('2022-01-03', '2022-01-07', 1008)
+insert into CARGO values('2022-01-01', '2022-01-05', 1009)
+insert into CARGO values('2022-01-02', '2022-01-06', 1010)
+insert into CARGO values('2022-01-03', '2022-01-07', 1011)
+insert into CARGO values('2022-01-01', '2022-01-05', 1012)
+insert into CARGO values('2022-01-02', '2022-01-06', 1013)
+insert into CARGO values('2022-01-03', '2022-01-07', 1014)
+insert into CARGO values('2022-01-01', '2022-01-05', 1015)
+insert into CARGO values('2022-01-02', '2022-01-06', 1016)
+insert into CARGO values('2022-01-03', '2022-01-07', 1017)
+
+
+
+
+insert into ORDER_ values(111111,2,2,100,100000)
+insert into ORDER_ values(111112,3,3,101,100001)
+insert into ORDER_ values(111113,4,4,102,100002)
+insert into ORDER_ values(111114,2,2,100,100003)
+insert into ORDER_ values(111115,3,3,101,100004)
+insert into ORDER_ values(111116,4,4,102,100005)
+insert into ORDER_ values(111118,2,2,100,100006)
+insert into ORDER_ values(111119,3,3,101,100007)
+insert into ORDER_ values(111120,4,4,102,100008)
+insert into ORDER_ values(111121,2,2,100,100009)
+insert into ORDER_ values(111122,3,3,101,100010)
+insert into ORDER_ values(111123,4,4,102,100011)
+insert into ORDER_ values(111124,2,2,100,100012)
+insert into ORDER_ values(111125,3,3,101,100013)
+insert into ORDER_ values(111126,4,4,102,100014)
+insert into ORDER_ values(111127,2,2,100,100015)
+insert into ORDER_ values(111128,3,3,101,100016)
+insert into ORDER_ values(111129,4,4,102,100017)
+
+
+
+update CUSTOMER set Cu_Phone= '545545545545' where Cu_Phone ='123123123123'
+update VENDOR set V_Address = 'Beþiktaþ' where V_Name= 'nokia'
+
+alter table ADDRESS_ alter column Street varchar(50) null
+
+alter table ADDRESS_ drop column Street
+alter table CUSTOMER drop column Cu_home_phone
+
+delete from CUSTOMER where Cu_Id = 1001 /* bu Id'ye sahip olan artýk müþterimiz deðildir */
+
+delete from COUNTRY where Co_Id = 51 /*Bu ülke pandemi dolayýsýyla artýk ticaret dýþýdýr. */ 
+
+
+
+select min(O_Size) from ORDER_
+select max(O_Weight) from ORDER_
+select * from CUSTOMER where FK_post_code in (87534,34520,57554)
+select sum(O_Weight) from ORDER_ where O_Weight between 1 and 5
+select FK_v_id, count(FK_v_id) from ORDER_ group by FK_v_id having count(FK_v_id)>111113
+select top 3 O_Weight from ORDER_ where FK_v_id<111113 and O_Size>2 order by O_Weight desc
+select distinct FK_v_id from ORDER_
+
+CREATE view  CustomerCargo
+as
+SELECT        dbo.CUSTOMER.Cu_Id, dbo.CUSTOMER.Cu_Name, dbo.CUSTOMER.Cu_SName, dbo.CUSTOMER.Cu_Phone, dbo.CUSTOMER.Cu_home_phone, dbo.CUSTOMER.Post_Code, dbo.CARGO.C_No, dbo.CARGO.Des_Date, 
+                         dbo.CARGO.Arr_Date, dbo.CARGO.FK_cu_id, dbo.ORDER_.O_No, dbo.ORDER_.O_Size, dbo.ORDER_.O_Weight, dbo.ORDER_.FK_v_id, dbo.ORDER_.FK_c_no
+FROM            dbo.CUSTOMER INNER JOIN
+                         dbo.CARGO ON dbo.CUSTOMER.Cu_Id = dbo.CARGO.FK_cu_id INNER JOIN
+                         dbo.ORDER_ ON dbo.CARGO.C_No = dbo.ORDER_.FK_c_no
+
+ALTER View  CustomerCargo
+as
+SELECT        dbo.CUSTOMER.Cu_Id, dbo.CUSTOMER.Cu_Name, dbo.CUSTOMER.Cu_SName, 
+dbo.CARGO.C_No, dbo.CARGO.Des_Date, 
+                         dbo.CARGO.Arr_Date, dbo.CARGO.FK_cu_id 
+FROM            dbo.CUSTOMER INNER JOIN
+                         dbo.CARGO ON dbo.CUSTOMER.Cu_Id = dbo.CARGO.FK_cu_id INNER JOIN
+                         dbo.ORDER_ ON dbo.CARGO.C_No = dbo.ORDER_.FK_c_no
+
+
+create trigger OrderSizeChangeTrigger
+on ORDER_
+after update
+as
+DECLARE @O_No AS int
+SELECT @O_No = O_No FROM inserted 
+update ORDER_ set O_Weight=O_Size where O_No=@O_No
+
+create trigger CargoChangeArrDate
+on CARGO
+after update
+as
+DECLARE @C_No AS int
+SELECT @C_No = C_No FROM inserted 
+update CARGO set Arr_Date=DATEADD(day,2,Des_Date) where C_No=@C_No
+
+select FK_cu_id from CARGO join CUSTOMER on CARGO.FK_cu_id = CUSTOMER.Cu_Id
+select FK_v_id from ORDER_ join VENDOR on ORDER_.FK_v_id = VENDOR.V_Id
+select FK_post_code from CUSTOMER join ADDRESS_ on CUSTOMER.FK_post_code = ADDRESS_.Post_Code
+select FK_c_no from ORDER_ join CARGO on ORDER_.FK_c_no = CARGO.C_No
+select FK_co_id from CITY join COUNTRY on CITY.FK_co_id = COUNTRY.Co_Id
+
+select ORDER_.FK_c_no, CARGO.FK_cu_id, CUSTOMER.Cu_Id
+from ORDER_
+join CARGO on ORDER_.FK_c_no = CARGO.FK_cu_id
+join CUSTOMER on ORDER_.FK_c_no = CUSTOMER.Cu_Id
+
+
+select ADDRESS_.FK_ci_id, CITY.Ci_Id, COUNTRY.Co_Id
+from ADDRESS_
+join CITY on ADDRESS_.FK_ci_id = CITY.Ci_Id
+join COUNTRY on CITY.FK_co_id = COUNTRY.Co_Id
+
+create procedure vendor_adress @adres varchar(50)
+	as
+	select * from VENDOR where V_Address = @adres
+
+exec vendor_adress @adres = 'Fatih'
+
+create procedure siparis_list (@minWeight int , @maxWeight int)
+	as
+	begin
+	select * from ORDER_ where O_Weight between @minWeight and @maxWeight
+	end
+
+exec siparis_list @minWeight=2, @maxWeight=3
+
+create function sip_adet (@ven_id int)
+	returns int
+	begin
+	declare @adet int
+	select @adet = COUNT(*)from ORDER_ where FK_v_id=@ven_id
+	return @adet
+	end
+
+select dbo.sip_adet(102)
+
+create function max_size(@number int)
+	returns int
+	begin
+	declare @wer
+	select @wer=(select mas(O_Size) from ORDER_ where O_Weight > @number)
+	return @wer
+	end
+
+declare @number int
+set @number = 3
+select dbo.max_size(@number)
